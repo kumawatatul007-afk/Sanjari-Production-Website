@@ -1,0 +1,14 @@
+/* App.css - Reset & Global App styles */
+#root {
+  min-height: 100vh;
+}
+
+main {
+  position: relative;
+}
+
+/* Utility classes for animations used across components */
+.animate-fadeInUp {
+  opacity: 0;
+  animation: fadeInUp 0.9s ease forwards;
+}

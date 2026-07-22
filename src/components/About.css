@@ -1,0 +1,211 @@
+.about-section {
+  padding: 7rem 2rem;
+  background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Visual Side */
+.about-visual {
+  position: relative;
+}
+
+.about-image-wrap {
+  position: relative;
+  padding: 1.5rem;
+}
+
+.about-image-main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--blue-deep) 0%, var(--dark-3) 100%);
+  border-radius: 4px;
+  border: 1px solid rgba(201,168,76,0.15);
+  overflow: hidden;
+}
+
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease;
+}
+
+.about-image-wrap:hover .about-photo {
+  transform: scale(1.04);
+}
+
+
+.about-image-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(13,39,68,0.6) 0%, transparent 60%);
+}
+
+.camera-icon-large {
+  position: relative;
+  z-index: 1;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 30px rgba(201,168,76,0.2));
+}
+
+/* Floating Badges */
+.about-badge-1,
+.about-badge-2 {
+  position: absolute;
+  background: rgba(8,12,20,0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 0.75rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.about-badge-1 {
+  bottom: 2rem;
+  right: -1rem;
+  animation-delay: 0.5s;
+}
+
+.about-badge-2 {
+  top: 3rem;
+  left: -1rem;
+  animation-delay: 1s;
+}
+
+.badge-number {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.about-badge-1 .badge-text,
+.about-badge-2 .badge-text {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+.badge-icon {
+  font-size: 1.4rem;
+}
+
+/* Content Side */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.about-content .section-tag { margin-bottom: 0.75rem; }
+.about-content .section-title { margin-bottom: 0; }
+
+/* Highlights */
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.highlight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.highlight-card:hover {
+  background: rgba(201,168,76,0.05);
+  border-color: rgba(201,168,76,0.15);
+  transform: translateX(6px);
+}
+
+.highlight-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.highlight-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.highlight-desc {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+.about-cta { margin-top: 0.5rem; }
+
+@media (max-width: 960px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-image-main { aspect-ratio: 16/9; max-height: 300px; }
+  .about-badge-1 { right: 0; }
+  .about-badge-2 { left: 0; }
+}
+
+@media (max-width: 480px) {
+  .about-section { padding: 4rem 1.2rem; }
+  .about-badge-1, .about-badge-2 { display: none; }
+}
