@@ -14,6 +14,12 @@ const galleryItems = [
   { id: 7, cat: 'Portrait',  title: 'Dramatic Chiaroscuro',    aspect: 'tall',   img: '/images/gallery_portrait_2.png',  colors: ['#1a0a0a', '#C9A84C'] },
   { id: 8, cat: 'Cinematic', title: 'City Lights Reel',        aspect: 'wide',   img: '/images/gallery_cinematic_2.png', colors: ['#0D1F3C', '#6BA3BE'] },
   { id: 9, cat: 'Fashion',   title: 'Urban Street Style',      aspect: 'square', img: '/images/gallery_fashion_2.png',   colors: ['#1B2838', '#C9A84C'] },
+  { id: 10, cat: 'Wedding',  title: 'Vows in the Woods',       aspect: 'wide',   img: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800',   colors: ['#1c2920', '#C9A84C'] },
+  { id: 11, cat: 'Corporate',title: 'Executive Summit',        aspect: 'square', img: 'https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&q=80&w=800', colors: ['#0A1118', '#385A82'] },
+  { id: 12, cat: 'Portrait', title: 'Neon Nights',             aspect: 'tall',   img: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=800',  colors: ['#290B3B', '#1FB2C4'] },
+  { id: 13, cat: 'Cinematic',title: 'Desert Mirage',           aspect: 'wide',   img: 'https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&q=80&w=800', colors: ['#291A0A', '#D4863A'] },
+  { id: 14, cat: 'Fashion',  title: 'Avant-Garde Studio',      aspect: 'tall',   img: 'https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&q=80&w=800',   colors: ['#292828', '#A93838'] },
+  { id: 15, cat: 'Wedding',  title: 'Vintage Elegance',        aspect: 'square', img: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800',   colors: ['#3A3026', '#E2D1A7'] },
 ];
 
 const GalleryCard = ({ item }) => {
@@ -64,11 +70,19 @@ const GalleryCard = ({ item }) => {
 
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [visibleCount, setVisibleCount] = useState(6);
   const sectionRef = useRef(null);
 
   const filtered = activeCategory === 'All'
     ? galleryItems
     : galleryItems.filter(item => item.cat === activeCategory);
+
+  const displayedItems = filtered.slice(0, visibleCount);
+
+  // Reset visible count when category changes
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [activeCategory]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,20 +133,26 @@ const Gallery = () => {
 
         {/* Grid */}
         <div className="gallery-grid">
-          {filtered.map(item => (
+          {displayedItems.map(item => (
             <GalleryCard key={item.id} item={item} />
           ))}
         </div>
 
         {/* Load More */}
-        <div className="gallery-more">
-          <button className="btn-outline" id="gallery-load-more">
-            <span>View Full Portfolio</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-        </div>
+        {visibleCount < filtered.length && (
+          <div className="gallery-more">
+            <button 
+              className="btn-outline" 
+              id="gallery-load-more" 
+              onClick={() => setVisibleCount(prev => prev + 6)}
+            >
+              <span>View Full Portfolio</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

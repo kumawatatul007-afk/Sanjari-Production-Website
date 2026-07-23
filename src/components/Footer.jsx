@@ -13,7 +13,7 @@ const serviceLinks = [
 
 const Footer = () => {
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -51,9 +51,12 @@ const Footer = () => {
             <ul className="footer-links">
               {['home', 'about', 'services', 'gallery', 'contact'].map(id => (
                 <li key={id}>
-                  <button onClick={() => scrollTo(id)}>
+                  <Link 
+                    to={id === 'home' ? '/' : `/${id}`} 
+                    className="footer-service-link"
+                  >
                     {id.charAt(0).toUpperCase() + id.slice(1)}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>

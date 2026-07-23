@@ -32,11 +32,11 @@ const Navbar = () => {
   }, [isHome]);
 
   const navLinks = [
-    { label: 'Home',     href: '#home' },
-    { label: 'About',    href: '#about' },
+    { label: 'Home', href: '#home' },
+    { label: 'About', href: '#about' },
     { label: 'Services', href: '#services' },
-    { label: 'Gallery',  href: '#gallery' },
-    { label: 'Contact',  href: '#contact' },
+    { label: 'Gallery', href: '#gallery' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   const scrollTo = (href) => {
@@ -120,4 +120,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 

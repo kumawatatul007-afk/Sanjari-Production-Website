@@ -14,75 +14,42 @@ const serviceRoutes = {
 const services = [
   {
     id: 'wedding',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M20 8C20 8 10 14 10 22C10 27.52 14.48 32 20 32C25.52 32 30 27.52 30 22C30 14 20 8 20 8Z" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M20 8V32M14 15L26 29M26 15L14 29" stroke="rgba(201,168,76,0.3)" strokeWidth="1"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/wedding.png" alt="Wedding Photography" className="service-img-icon" />,
     title: 'Wedding Photography',
     desc: 'Capturing the magic of your special day with cinematic elegance. Every emotion, every glance — immortalized forever.',
     features: ['Pre-Wedding Shoot', 'Ceremony Coverage', 'Reception Highlights', 'Album Design'],
   },
   {
     id: 'videography',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <rect x="4" y="12" width="24" height="16" rx="3" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M28 17L36 13V27L28 23V17Z" stroke="#C9A84C" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/videography.png" alt="Cinematic Videography" className="service-img-icon" />,
     title: 'Cinematic Videography',
     desc: 'Transform your events into stunning cinematic films. Professional editing, color grading, and soundtrack included.',
     features: ['4K Film Production', 'Drone Aerial Shots', 'Color Grading', 'Cinematic Edit'],
   },
   {
     id: 'portrait',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <circle cx="20" cy="15" r="6" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M8 34C8 27.37 13.37 22 20 22C26.63 22 32 27.37 32 34" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/portrait.png" alt="Portrait Sessions" className="service-img-icon" />,
     title: 'Portrait Sessions',
     desc: 'Professional portrait photography that brings out your authentic self. Perfect for professionals, models, and families.',
     features: ['Studio Lighting', 'Outdoor Sessions', 'Professional Retouching', 'Same-Day Previews'],
   },
   {
     id: 'corporate',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <rect x="8" y="10" width="24" height="20" rx="2" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M15 10V8C15 7.45 15.45 7 16 7H24C24.55 7 25 7.45 25 8V10" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M8 20H32" stroke="#C9A84C" strokeWidth="1" strokeDasharray="2 2"/>
-        <circle cx="20" cy="20" r="3" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/corporate.png" alt="Corporate Events" className="service-img-icon" />,
     title: 'Corporate Events',
     desc: 'Elevate your brand with professional corporate photography and videography that tells your company story.',
     features: ['Product Photography', 'Event Coverage', 'Brand Videos', 'Executive Portraits'],
   },
   {
     id: 'fashion',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M14 8L10 16H30L26 8H14Z" stroke="#C9A84C" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
-        <path d="M10 16V32H30V16" stroke="#C9A84C" strokeWidth="1.5" fill="none"/>
-        <path d="M20 8V16" stroke="#C9A84C" strokeWidth="1" strokeDasharray="2 2"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/fashion.png" alt="Fashion & Editorial" className="service-img-icon" />,
     title: 'Fashion & Editorial',
     desc: 'High-fashion photography that makes a statement. Creative direction, styling guidance, and magazine-worthy results.',
     features: ['Lookbook Production', 'Magazine Editorials', 'E-Commerce Shoots', 'Creative Direction'],
   },
   {
     id: 'aerial',
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-        <path d="M20 8L14 18H10L14 22V30H18V26H22V30H26V22L30 18H26L20 8Z" stroke="#C9A84C" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
-        <circle cx="20" cy="19" r="2" fill="#C9A84C"/>
-      </svg>
-    ),
+    icon: <img src="/images/icons/aerial.png" alt="Aerial Drone Shots" className="service-img-icon" />,
     title: 'Aerial Drone Shots',
     desc: 'Breathtaking aerial perspectives that add a cinematic grandeur to your events, real estate, and promotional content.',
     features: ['4K Drone Footage', 'Real Estate Aerials', 'Event Overviews', 'Landscape Photography'],

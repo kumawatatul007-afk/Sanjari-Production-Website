@@ -304,6 +304,13 @@
   justify-content: center;
 }
 
+.sp-feature-img-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
 .sp-feature-name {
   display: block;
   font-family: 'Raleway', sans-serif;
@@ -369,6 +376,15 @@
 .sp-step-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
+}
+
+.sp-step-img-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(201,168,76,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
 .sp-step-title {

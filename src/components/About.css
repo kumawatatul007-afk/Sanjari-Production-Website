@@ -176,6 +176,15 @@
   margin-top: 0.1rem;
 }
 
+.highlight-img-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(201,168,76,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
 .highlight-title {
   font-family: 'Cinzel', serif;
   font-size: 0.82rem;

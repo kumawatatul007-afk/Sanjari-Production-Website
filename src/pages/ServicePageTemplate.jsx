@@ -101,7 +101,9 @@ const ServicePageTemplate = ({ service }) => {
                 <ul className="sp-features-list">
                   {service.includes.map(item => (
                     <li key={item.label} className="sp-feature-item">
-                      <div className="sp-feature-icon">{item.icon}</div>
+                      <div className="sp-feature-icon">
+                        <img src={item.icon} alt={item.label} className="sp-feature-img-icon" />
+                      </div>
                       <div>
                         <span className="sp-feature-name">{item.label}</span>
                         <span className="sp-feature-desc">{item.desc}</span>
@@ -126,7 +128,9 @@ const ServicePageTemplate = ({ service }) => {
             {service.process.map((step, i) => (
               <div className="sp-step reveal" key={step.title}>
                 <div className="sp-step-num">{String(i + 1).padStart(2, '0')}</div>
-                <div className="sp-step-icon">{step.icon}</div>
+                <div className="sp-step-icon">
+                  <img src={step.icon} alt={step.title} className="sp-step-img-icon" />
+                </div>
                 <h4 className="sp-step-title">{step.title}</h4>
                 <p className="sp-step-desc">{step.desc}</p>
                 {i < service.process.length - 1 && <div className="sp-step-arrow">→</div>}

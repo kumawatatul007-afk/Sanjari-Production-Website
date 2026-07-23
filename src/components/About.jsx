@@ -23,9 +23,9 @@ const About = () => {
   }, []);
 
   const highlights = [
-    { icon: '🎬', title: 'Cinematic Vision', desc: 'Every project is approached as a cinematic piece, crafted with narrative depth and visual artistry.' },
-    { icon: '📷', title: 'Expert Photography', desc: 'From weddings to corporate events, our lens captures the authentic essence of every moment.' },
-    { icon: '✨', title: 'Premium Quality', desc: 'State-of-the-art equipment combined with years of expertise delivers exceptional results every time.' },
+    { icon: '/images/icons/cinema.png', title: 'Cinematic Vision', desc: 'Every project is approached as a cinematic piece, crafted with narrative depth and visual artistry.' },
+    { icon: '/images/icons/camera.png', title: 'Expert Photography', desc: 'From weddings to corporate events, our lens captures the authentic essence of every moment.' },
+    { icon: '/images/icons/magic.png', title: 'Premium Quality', desc: 'State-of-the-art equipment combined with years of expertise delivers exceptional results every time.' },
   ];
 
   return (
@@ -81,7 +81,9 @@ const About = () => {
           <div className="about-highlights reveal">
             {highlights.map((h) => (
               <div className="highlight-card" key={h.title}>
-                <div className="highlight-icon">{h.icon}</div>
+                <div className="highlight-icon">
+                  <img src={h.icon} alt={h.title} className="highlight-img-icon" />
+                </div>
                 <div>
                   <h4 className="highlight-title">{h.title}</h4>
                   <p className="highlight-desc">{h.desc}</p>
