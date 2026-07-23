@@ -158,16 +158,14 @@
 
 /* Mobile Menu */
 .mobile-menu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   background: rgba(8, 12, 20, 0.98);
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(201,168,76,0.1);
-}
-
-.mobile-menu.open {
-  max-height: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .mobile-menu ul {

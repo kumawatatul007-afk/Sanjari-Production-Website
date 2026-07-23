@@ -9,6 +9,8 @@ import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
+import CustomCursor from './components/CustomCursor';
+import FloatingButtons from './components/FloatingButtons';
 
 // Service Pages
 import WeddingPage from './pages/WeddingPage';
@@ -47,6 +49,7 @@ const PageWrapper = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
+      <CustomCursor />
       <Preloader />
       <Navbar />
       <Routes>
@@ -62,6 +65,7 @@ function App() {
         <Route path="/services/fashion" element={<FashionPage />} />
         <Route path="/services/aerial" element={<AerialPage />} />
       </Routes>
+      <FloatingButtons />
       <Footer />
     </BrowserRouter>
   );

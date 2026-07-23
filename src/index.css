@@ -4,22 +4,36 @@
   --gold: #C9A84C;
   --gold-light: #F0C040;
   --gold-dark: #A07830;
+  --gold-glow: rgba(201, 168, 76, 0.5);
   --blue-deep: #0D2744;
   --blue-mid: #1B3A6B;
   --blue-light: #2A5298;
-  --dark: #080c14;
-  --dark-2: #0f1624;
-  --dark-3: #161e30;
+  --dark: #05080f;
+  --dark-2: #0a0f1c;
+  --dark-3: #121a2f;
   --white: #FFFFFF;
   --white-80: rgba(255,255,255,0.8);
   --white-60: rgba(255,255,255,0.6);
   --white-20: rgba(255,255,255,0.2);
   --white-10: rgba(255,255,255,0.08);
+  --white-5: rgba(255,255,255,0.03);
+  
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(10, 15, 28, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-gold: rgba(201, 168, 76, 0.2);
+  --glass-blur: 16px;
+
   --font-heading: 'Cinzel', serif;
   --font-body: 'Raleway', sans-serif;
   --font-accent: 'Playfair Display', serif;
+  
+  --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
   --shadow-gold: 0 0 30px rgba(201, 168, 76, 0.3);
+  --shadow-gold-lg: 0 0 50px rgba(201, 168, 76, 0.4);
   --shadow-dark: 0 20px 60px rgba(0,0,0,0.5);
 }
 

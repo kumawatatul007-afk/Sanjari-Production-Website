@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ChevronRight, PlayCircle, Camera } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
@@ -19,6 +21,10 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleParallax);
   }, []);
 
+  const { scrollY } = useScroll();
+  const yBg = useTransform(scrollY, [0, 1000], [0, 300]);
+  const opacityText = useTransform(scrollY, [0, 300], [1, 0]);
+
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -26,63 +32,87 @@ const Hero = () => {
   return (
     <section id="home" className="hero" ref={heroRef}>
       {/* Background Layers */}
-      <div className="hero-bg">
+      <motion.div className="hero-bg" style={{ y: yBg }}>
         <div className="hero-overlay" />
         <div className="hero-grid" />
         <div className="orb orb-1" />
         <div className="orb orb-2" />
         <div className="orb orb-3" />
-      </div>
+      </motion.div>
 
       {/* Cinematic Bars */}
       <div className="cinematic-bar top" />
       <div className="cinematic-bar bottom" />
 
       {/* Content */}
-      <div className="hero-content">
-        <div className="hero-badge animate-fadeInUp delay-1">
+      <motion.div className="hero-content" style={{ opacity: opacityText }}>
+        <motion.div 
+          className="hero-badge"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <span className="badge-dot" />
           <span>Premium Photography &amp; Videography</span>
-        </div>
+        </motion.div>
 
-        <h1 className="hero-title animate-fadeInUp delay-2">
+        <motion.h1 
+          className="hero-title"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           <span className="hero-title-line">Capturing</span>
           <span className="hero-title-gold">Timeless</span>
           <span className="hero-title-line">Moments</span>
-        </h1>
+        </motion.h1>
 
-        <p className="hero-subtitle animate-fadeInUp delay-3">
+        <motion.p 
+          className="hero-subtitle"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
           Every frame tells a story. We craft visual masterpieces that transcend time —
           from intimate portraits to grand cinematic productions.
-        </p>
+        </motion.p>
 
-        <div className="hero-cta animate-fadeInUp delay-4">
+        <motion.div 
+          className="hero-cta"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
           <button className="btn-primary" id="hero-explore-btn" onClick={() => scrollToSection('gallery')}>
             <span>Explore Work</span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ChevronRight size={18} />
           </button>
           <button className="btn-outline" id="hero-contact-btn" onClick={() => scrollToSection('contact')}>
+            <Camera size={18} className="gold-text" style={{ marginRight: '6px' }} />
             <span>Book a Shoot</span>
           </button>
-        </div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="hero-stats animate-fadeInUp delay-5">
+        <motion.div 
+          className="hero-stats"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
           {[
             { num: '500+', label: 'Projects Done' },
             { num: '8+', label: 'Years Experience' },
             { num: '200+', label: 'Happy Clients' },
             { num: '15+', label: 'Awards Won' },
-          ].map((stat) => (
+          ].map((stat, idx) => (
             <div className="stat-item" key={stat.label}>
               <span className="stat-num">{stat.num}</span>
               <span className="stat-label">{stat.label}</span>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <div className="scroll-indicator" onClick={() => scrollToSection('about')}>

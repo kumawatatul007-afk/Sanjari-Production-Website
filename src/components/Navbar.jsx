@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
 
 
@@ -53,10 +54,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <motion.nav 
+      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="navbar-inner">
         {/* Logo */}
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo hover-target">
           <div className="logo-img-wrap">
             <img src="/images/sanjari_logo.jpg" alt="Sanjari Production Logo" className="logo-img" />
           </div>
@@ -70,7 +76,7 @@ const Navbar = () => {
             <li key={link.label}>
               <a
                 href={link.href}
-                className={activeSection === link.href.slice(1) ? 'active' : ''}
+                className={`hover-target ${activeSection === link.href.slice(1) ? 'active' : ''}`}
                 onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
               >
                 {link.label}
@@ -82,7 +88,7 @@ const Navbar = () => {
         {/* CTA */}
         <a
           href="#contact"
-          className="navbar-cta"
+          className="navbar-cta hover-target"
           onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
         >
           <span>Book Now</span>
@@ -90,7 +96,7 @@ const Navbar = () => {
 
         {/* Hamburger */}
         <button
-          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          className={`hamburger hover-target ${menuOpen ? 'open' : ''}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           id="hamburger-btn"
@@ -100,23 +106,33 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <ul>
-          {navLinks.map(link => (
-            <li key={link.label}>
-              <a href={link.href} onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}>
-                {link.label}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a href="#contact" className="mobile-cta" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}>
-              Book Now
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div 
+            className="mobile-menu"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ul>
+              {navLinks.map(link => (
+                <li key={link.label}>
+                  <a href={link.href} onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="#contact" className="mobile-cta" onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}>
+                  Book Now
+                </a>
+              </li>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
