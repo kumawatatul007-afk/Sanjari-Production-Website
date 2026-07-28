@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Clock, Send, CheckCircle } from 'lucide-react';
+
+import { ScrollReveal, SplitText } from './ScrollReveal';
 import './Contact.css';
 
 const contactInfo = [
@@ -31,9 +33,9 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,15 +51,15 @@ const Contact = () => {
     <section id="contact" className="contact-section" ref={sectionRef}>
       <div className="contact-container">
         {/* Left */}
-        <motion.div 
+        <ScrollReveal 
           className="contact-left"
-          initial={{ opacity: 0, x: -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-          transition={{ duration: 0.8 }}
+          variant="slideRight"
         >
           <p className="section-tag">Get In Touch</p>
           <h2 className="section-title">
-            Let's Create<br />Something <span>Beautiful</span>
+            <SplitText text="Let's Create" />
+            <br />
+            <SplitText text="Something" /> <span><SplitText text="Beautiful" /></span>
           </h2>
           <p className="section-desc">
             Ready to capture your most precious moments? We'd love to hear about your vision
@@ -66,19 +68,18 @@ const Contact = () => {
 
           <div className="contact-info">
             {contactInfo.map((info, i) => (
-              <motion.div 
+              <ScrollReveal 
                 className="contact-info-item" 
                 key={info.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
+                variant="slideUp"
+                delay={0.1 * i}
               >
                 <div className="contact-info-icon">{info.icon}</div>
                 <div>
                   <span className="contact-info-label">{info.label}</span>
                   <span className="contact-info-value">{info.value}</span>
                 </div>
-              </motion.div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -94,14 +95,12 @@ const Contact = () => {
               </a>
             ))}
           </div>
-        </motion.div>
+        </ScrollReveal>
 
         {/* Right: Form */}
-        <motion.div 
+        <ScrollReveal 
           className="contact-right"
-          initial={{ opacity: 0, x: 50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-          transition={{ duration: 0.8 }}
+          variant="slideLeft"
         >
           <div className="contact-form-card">
             <h3 className="form-title">Book a Session</h3>
@@ -179,7 +178,9 @@ const Contact = () => {
                   />
                 </div>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="btn-primary submit-btn hover-target"
                   id="contact-submit-btn"
@@ -196,14 +197,15 @@ const Contact = () => {
                       <Send size={18} />
                     </>
                   )}
-                </button>
+                </motion.button>
               </form>
             )}
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   );
 };
 
 export default Contact;
+

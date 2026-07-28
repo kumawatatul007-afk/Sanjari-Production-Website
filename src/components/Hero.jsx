@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronRight, PlayCircle, Camera } from 'lucide-react';
+import { ChevronRight, Camera } from 'lucide-react';
+import { SplitText } from './ScrollReveal';
 import './Hero.css';
+
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -56,22 +58,17 @@ const Hero = () => {
           <span>Premium Photography &amp; Videography</span>
         </motion.div>
 
-        <motion.h1 
-          className="hero-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <span className="hero-title-line">Capturing</span>
-          <span className="hero-title-gold">Timeless</span>
-          <span className="hero-title-line">Moments</span>
-        </motion.h1>
+        <h1 className="hero-title" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <SplitText text="Capturing" className="hero-title-line" delay={0.4} />
+          <SplitText text="Timeless" className="hero-title-gold" delay={0.6} />
+          <SplitText text="Moments" className="hero-title-line" delay={0.8} />
+        </h1>
 
         <motion.p 
           className="hero-subtitle"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
         >
           Every frame tells a story. We craft visual masterpieces that transcend time —
           from intimate portraits to grand cinematic productions.
@@ -81,7 +78,7 @@ const Hero = () => {
           className="hero-cta"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         >
           <button className="btn-primary" id="hero-explore-btn" onClick={() => scrollToSection('gallery')}>
             <span>Explore Work</span>
@@ -98,29 +95,36 @@ const Hero = () => {
           className="hero-stats"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
         >
           {[
             { num: '500+', label: 'Projects Done' },
             { num: '8+', label: 'Years Experience' },
             { num: '200+', label: 'Happy Clients' },
             { num: '15+', label: 'Awards Won' },
-          ].map((stat, idx) => (
+          ].map((stat) => (
             <div className="stat-item" key={stat.label}>
               <span className="stat-num">{stat.num}</span>
               <span className="stat-label">{stat.label}</span>
             </div>
           ))}
+
         </motion.div>
       </motion.div>
 
       {/* Scroll Indicator */}
-      <div className="scroll-indicator" onClick={() => scrollToSection('about')}>
+      <motion.div 
+        className="scroll-indicator" 
+        onClick={() => scrollToSection('about')}
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
         <div className="scroll-mouse">
           <div className="scroll-wheel" />
         </div>
         <span>Scroll</span>
-      </div>
+      </motion.div>
+
 
       {/* Decorative Film Strip */}
       <div className="film-strip">

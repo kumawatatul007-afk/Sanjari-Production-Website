@@ -1,40 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 
 :root {
-  --gold: #C9A84C;
-  --gold-light: #F0C040;
-  --gold-dark: #A07830;
-  --gold-glow: rgba(201, 168, 76, 0.5);
-  --blue-deep: #0D2744;
-  --blue-mid: #1B3A6B;
-  --blue-light: #2A5298;
-  --dark: #05080f;
-  --dark-2: #0a0f1c;
-  --dark-3: #121a2f;
+  --gold: #d4af37; /* Satin liquid gold */
+  --gold-light: #f3e5ab; /* Satin light gold */
+  --gold-dark: #aa7c11; /* Satin deep gold */
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --blue-deep: #030812;
+  --blue-mid: #0b1528;
+  --blue-light: #162a4d;
+  --dark: #020408; /* Obsidian Black */
+  --dark-2: #060910; /* Space Obsidian */
+  --dark-3: #0c1220; /* Deep Satin Obsidian */
   --white: #FFFFFF;
-  --white-80: rgba(255,255,255,0.8);
-  --white-60: rgba(255,255,255,0.6);
-  --white-20: rgba(255,255,255,0.2);
-  --white-10: rgba(255,255,255,0.08);
-  --white-5: rgba(255,255,255,0.03);
+  --white-80: rgba(255,255,255,0.82);
+  --white-60: rgba(255,255,255,0.62);
+  --white-20: rgba(255,255,255,0.22);
+  --white-10: rgba(255,255,255,0.09);
+  --white-5: rgba(255,255,255,0.04);
   
   /* Glassmorphism Tokens */
-  --glass-bg: rgba(10, 15, 28, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-gold: rgba(201, 168, 76, 0.2);
-  --glass-blur: 16px;
+  --glass-bg: rgba(6, 9, 16, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-border-gold: rgba(212, 175, 55, 0.16);
+  --glass-blur: 24px;
 
   --font-heading: 'Cinzel', serif;
   --font-body: 'Raleway', sans-serif;
   --font-accent: 'Playfair Display', serif;
   
-  --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --transition-slow: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   
-  --shadow-gold: 0 0 30px rgba(201, 168, 76, 0.3);
-  --shadow-gold-lg: 0 0 50px rgba(201, 168, 76, 0.4);
-  --shadow-dark: 0 20px 60px rgba(0,0,0,0.5);
+  --shadow-gold: 0 0 25px rgba(212, 175, 55, 0.2);
+  --shadow-gold-lg: 0 0 45px rgba(212, 175, 55, 0.35);
+  --shadow-dark: 0 25px 55px rgba(0,0,0,0.6);
 }
 
 *, *::before, *::after {
@@ -54,6 +54,18 @@ body {
   color: var(--white);
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+/* Global Film Grain Noise Texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 99999;
 }
 
 ::-webkit-scrollbar {
@@ -86,6 +98,13 @@ button {
 
 .gold-text {
   color: var(--gold);
+}
+
+.metallic-gold-text {
+  background: linear-gradient(135deg, #fff 10%, var(--gold-light) 30%, var(--gold) 65%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .section-tag {
@@ -132,6 +151,12 @@ button {
   margin-top: 1rem;
 }
 
+/* Cinematic Shimmer Reflection Animation */
+@keyframes sweep-reflection {
+  0% { left: -150%; }
+  100% { left: 150%; }
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -156,32 +181,63 @@ button {
   background: linear-gradient(135deg, var(--gold-light), var(--gold));
   opacity: 0;
   transition: var(--transition);
+  z-index: 1;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  animation: sweep-reflection 6s infinite ease-in-out;
+  z-index: 2;
 }
 .btn-primary:hover::before { opacity: 1; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold); }
-.btn-primary span { position: relative; z-index: 1; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-gold-lg); }
+.btn-primary span { position: relative; z-index: 3; }
+.btn-primary svg { position: relative; z-index: 3; }
 
 .btn-outline {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   padding: 0.82rem 2.2rem;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.02);
   color: var(--white);
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  border: 1px solid var(--white-20);
+  border: 1px solid var(--white-10);
   border-radius: 2px;
   transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.btn-outline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: skewX(-20deg);
+  animation: sweep-reflection 8s infinite ease-in-out;
+  animation-delay: 2s;
 }
 .btn-outline:hover {
   border-color: var(--gold);
   color: var(--gold);
+  background: rgba(212, 175, 55, 0.04);
   transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.08);
 }
+
 
 .divider {
   display: flex;

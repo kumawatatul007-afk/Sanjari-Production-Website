@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 999999;
-  background: #080c14; /* Deep dark blue/black cinematic background */
+  background: #030509; /* Deep obsidian black background */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,8 +19,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   z-index: 1;
 }
@@ -30,7 +30,7 @@
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 60%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -55,8 +55,8 @@
   height: 140px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(201,168,76,0.4);
-  box-shadow: 0 0 30px rgba(201,168,76,0.2), inset 0 0 20px rgba(201,168,76,0.1);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.2), inset 0 0 20px rgba(212, 175, 55, 0.1);
   animation: pulse-glow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   position: relative;
 }
@@ -91,7 +91,7 @@
 }
 
 .preloader-text-gold {
-  color: #C9A84C;
+  color: var(--gold);
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.4em;
@@ -115,8 +115,8 @@
   left: 0;
   bottom: 0;
   width: 0%;
-  background: linear-gradient(90deg, transparent, #C9A84C, #fff);
-  box-shadow: 0 0 10px #C9A84C;
+  background: linear-gradient(90deg, transparent, var(--gold), #fff);
+  box-shadow: 0 0 10px var(--gold);
   border-radius: 4px;
   animation: loading-bar 2.2s ease-in-out forwards;
 }
@@ -129,16 +129,17 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 30px rgba(201,168,76,0.15), inset 0 0 20px rgba(201,168,76,0.1);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.1);
     transform: scale(1);
-    border-color: rgba(201,168,76,0.3);
+    border-color: rgba(212, 175, 55, 0.3);
   }
   50% {
-    box-shadow: 0 0 50px rgba(201,168,76,0.4), inset 0 0 30px rgba(201,168,76,0.2);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.4), inset 0 0 30px rgba(212, 175, 55, 0.2);
     transform: scale(1.05);
-    border-color: rgba(201,168,76,0.6);
+    border-color: rgba(212, 175, 55, 0.6);
   }
 }
+
 
 @keyframes subtle-scale {
   0% { transform: scale(1); }

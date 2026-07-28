@@ -1,9 +1,9 @@
 // ─── ALL SERVICE DATA ───────────────────────────────────────────────
 
 export const weddingData = {
-  title: 'Wedding Photography',
+  title: 'Wedding Photography & Films',
   category: 'Wedding',
-  tagline: '"Every love story is beautiful, but yours deserves to be told in the most extraordinary way."',
+  tagline: '"Every love story is beautiful, but yours deserves to be cinematic."',
   color1: '#1B3A6B',
   color2: '#C9A84C',
   heroImage: '/images/gallery_wedding_1.png',
@@ -13,19 +13,25 @@ export const weddingData = {
     { value: '100%', label: 'Client Satisfaction' },
     { value: '15+', label: 'Awards Won' },
   ],
-  overviewTitle: 'Your Wedding, Immortalized Forever',
+  overviewTitle: 'Your Wedding, Immortalized in Gold',
   overviewDesc: [
-    'At Sanjari Production, we believe your wedding day is the most cinematic story of your life. Our wedding photography service is crafted with a blend of artistic vision, technical excellence, and heartfelt storytelling.',
-    'From the intimate moments of getting ready to the grandeur of your reception, we capture every emotion, every glance, and every laugh — creating a visual legacy that you and your family will treasure for generations.',
-    'Our team travels across Rajasthan and India, bringing our signature gold-and-blue cinematic aesthetic to every wedding we photograph.',
+    'At Sanjari Production, we believe your wedding day is the most important cinematic story of your life. We do not just document events; we capture the soul, the grandeur, and the fleeting, unseen moments that make your story unique.',
+    'Our wedding photography and filmmaking service is crafted with a blend of high-fashion artistic vision, technical excellence, and heartfelt storytelling. From the intimate chaos of getting ready to the epic scale of your reception, we shoot with a directorial eye — turning your reality into a masterpiece.',
+    'We specialize in luxury destination weddings across India, bringing our signature gold-and-deep-blue cinematic aesthetic to every frame we capture.'
+  ],
+  equipment: [
+    { icon: 'camera', name: 'Sony A1 & A7RV', desc: 'Flagship 50MP+ sensors for insane detail and dynamic range.' },
+    { icon: 'lens', name: 'Sony G-Master Primes', desc: 'F1.2 & F1.4 lenses for that creamy, dreamy background blur.' },
+    { icon: 'drone', name: 'DJI Mavic 3 Pro', desc: 'Triple-camera drone for sweeping, majestic venue shots.' },
+    { icon: 'lighting', name: 'Profoto B10X', desc: 'Studio-quality off-camera flash for dramatic nighttime portraits.' }
   ],
   includes: [
     { icon: '/images/icons/camera.png', label: 'Pre-Wedding Shoot', desc: 'Romantic couple session at a location of your choice' },
     { icon: '/images/icons/cinema.png', label: 'Full Day Coverage', desc: 'Complete coverage from Mehndi to Reception' },
     { icon: '/images/icons/location.png', label: 'Outstation Travel', desc: 'We travel anywhere in India for destination weddings' },
     { icon: '/images/icons/digital.png', label: 'High-Res Delivery', desc: '500+ edited photos delivered in digital album' },
-    { icon: '/images/icons/album.png', label: 'Premium Album', desc: 'Luxury hard-cover photo album included' },
-    { icon: '/images/icons/album.png', label: 'Canvas Prints', desc: '2 large canvas prints of your favourite shots' },
+    { icon: '/images/icons/album.png', label: 'Premium Album', desc: 'Luxury hard-cover flush-mount photo album' },
+    { icon: '/images/icons/album.png', label: 'Canvas Prints', desc: '2 large archival-quality canvas prints' },
   ],
   process: [
     { icon: '/images/icons/chat.png', title: 'Consultation', desc: 'We discuss your vision, style preferences, venues, and timeline.' },
@@ -47,7 +53,7 @@ export const weddingData = {
       unit: '/event',
       featured: false,
       features: [
-        '1 Photographer',
+        '1 Senior Photographer',
         '6 Hours Coverage',
         '250 Edited Photos',
         'Online Gallery',
@@ -61,7 +67,7 @@ export const weddingData = {
       unit: '/event',
       featured: true,
       features: [
-        '2 Photographers',
+        '2 Senior Photographers',
         'Full Day Coverage (12hrs)',
         '500+ Edited Photos',
         'Pre-Wedding Shoot',
@@ -93,20 +99,26 @@ export const weddingData = {
 export const videographyData = {
   title: 'Cinematic Videography',
   category: 'Videography',
-  tagline: '"We don\'t just record moments — we craft films that move your soul."',
+  tagline: '"We don\'t just record moments — we direct films that move your soul."',
   color1: '#0D1F3C',
   color2: '#4A90D9',
   heroImage: '/images/gallery_cinematic_2.png',
   stats: [
     { value: '200+', label: 'Films Created' },
-    { value: '4K', label: 'Resolution' },
+    { value: '4K/8K', label: 'Resolution' },
     { value: '100%', label: 'Client Love' },
     { value: '10+', label: 'Film Awards' },
   ],
-  overviewTitle: 'Storytelling Through the Art of Cinema',
+  overviewTitle: 'Hollywood-Level Production for Your Story',
   overviewDesc: [
-    'Sanjari Production\'s cinematic videography service transforms your special events into breathtaking film productions. Using state-of-the-art cinema cameras, gimbals, and drones, we create videos that feel like they belong on the big screen.',
-    'Our in-house post-production team handles color grading, sound design, and editing to deliver a final product that exceeds every expectation. Whether it\'s a wedding film, brand video, or documentary — we bring Hollywood-level production to every project.',
+    'Sanjari Production\'s cinematic videography transforms events, brands, and music into breathtaking film productions. We do not use standard video cameras; we shoot exclusively on Netflix-approved Cinema lines.',
+    'Our approach involves meticulous storyboarding, motivated camera movement, and intricate sound design. In post-production, our DaVinci Resolve colorists craft a cinematic look that rivals modern feature films, ensuring your video feels grand, emotional, and timeless.',
+  ],
+  equipment: [
+    { icon: 'video', name: 'Sony FX6 & RED Komodo', desc: 'True cinema cameras with incredible dynamic range and color science.' },
+    { icon: 'stabilizer', name: 'DJI RS3 Pro Gimbal', desc: 'Heavy-duty stabilizers for buttery-smooth tracking shots.' },
+    { icon: 'audio', name: 'Rode & Sennheiser Audio', desc: '32-bit float audio recorders so we never miss a whisper or a cheer.' },
+    { icon: 'monitor', name: 'Atomos Ninja V', desc: 'Pro-res external monitoring for perfect exposure on set.' }
   ],
   includes: [
     { icon: '/images/icons/cinema.png', label: '4K Cinema Cameras', desc: 'Sony FX6, Blackmagic Cinema Line' },
@@ -180,9 +192,9 @@ export const videographyData = {
 };
 
 export const portraitData = {
-  title: 'Portrait Sessions',
+  title: 'Premium Portraiture',
   category: 'Portrait',
-  tagline: '"Every face tells a story. We find the light that makes yours unforgettable."',
+  tagline: '"Every face tells a story. We sculpt light to make yours unforgettable."',
   color1: '#1a0a2e',
   color2: '#C9A84C',
   heroImage: '/images/gallery_portrait_1.png',
@@ -194,8 +206,14 @@ export const portraitData = {
   ],
   overviewTitle: 'Portraits That Speak Without Words',
   overviewDesc: [
-    'A great portrait goes beyond just a photograph — it\'s a window into someone\'s soul. Our portrait sessions are carefully crafted experiences that help you feel confident, comfortable, and truly yourself in front of the camera.',
-    'Whether you need professional headshots, family portraits, a model portfolio, or a creative artistic shoot, our Jaipur studio and outdoor locations provide the perfect setting for every style of portrait photography.',
+    'A great portrait goes beyond just a photograph — it\'s a window into someone\'s soul. Our premium portrait sessions are carefully crafted experiences that help you feel confident, powerful, and truly yourself in front of the lens.',
+    'We employ high-end editorial lighting techniques used by top fashion magazines to sculpt your features. Whether you need professional executive headshots, a creative model portfolio, or intimate fine-art portraits, we deliver imagery that demands attention.',
+  ],
+  equipment: [
+    { icon: 'camera', name: 'Sony A7RV (61MP)', desc: 'Ultra-high resolution for flawless skin texture and detail.' },
+    { icon: 'lighting', name: 'Profoto Pro-11', desc: 'The world\'s fastest and most consistent studio strobes.' },
+    { icon: 'lens', name: 'Sony 85mm f/1.4 GM', desc: 'The ultimate portrait lens for stunning subject isolation.' },
+    { icon: 'monitor', name: 'Capture One Tethering', desc: 'Real-time tethered shooting so you can see results instantly on a large screen.' }
   ],
   includes: [
     { icon: '/images/icons/magic.png', label: 'Professional Lighting', desc: 'Studio strobes, beauty dishes, and natural light setups' },
@@ -267,9 +285,9 @@ export const portraitData = {
 };
 
 export const corporateData = {
-  title: 'Corporate Events',
+  title: 'Corporate & Brand Identity',
   category: 'Corporate',
-  tagline: '"Elevate your brand with imagery that commands attention and inspires confidence."',
+  tagline: '"Elevate your brand with imagery that commands authority and inspires trust."',
   color1: '#0f1e3c',
   color2: '#2A5298',
   heroImage: '/images/gallery_corporate_1.png',
@@ -281,8 +299,14 @@ export const corporateData = {
   ],
   overviewTitle: 'Visual Content That Builds Brands',
   overviewDesc: [
-    'In today\'s visual-first world, your brand imagery is your first impression. Sanjari Production\'s corporate photography and videography service helps businesses, startups, and enterprises create powerful visual content that communicates professionalism, trust, and vision.',
-    'From product launches to executive portraits, annual conferences to brand films — we deliver corporate content that stands out in boardrooms and social media alike.',
+    'In today\'s visual-first world, your brand imagery is your first impression. Sanjari Production\'s corporate photography helps businesses, startups, and enterprises create powerful visual content that communicates professionalism and vision.',
+    'From dynamic product launches and high-stakes conferences to polished executive portraits and brand films — we deliver corporate content that stands out in boardrooms, annual reports, and social media campaigns alike.',
+  ],
+  equipment: [
+    { icon: 'camera', name: 'Dual Sony A7IV Setup', desc: 'Fast, reliable, and unobtrusive cameras for corporate events.' },
+    { icon: 'lens', name: '70-200mm f/2.8 GM II', desc: 'Allows us to capture speakers and guests from a distance without interrupting.' },
+    { icon: 'lighting', name: 'Portable Softboxes', desc: 'Quick-setup studio lighting for on-location executive headshots.' },
+    { icon: 'monitor', name: 'Instant Delivery Tech', desc: 'On-site photo transfer capabilities for live social media updates.' }
   ],
   includes: [
     { icon: '/images/icons/location.png', label: 'Event Coverage', desc: 'Full corporate event, conference, or product launch coverage' },
@@ -368,7 +392,13 @@ export const fashionData = {
   overviewTitle: 'Where Fashion Meets Fine Art',
   overviewDesc: [
     'Sanjari Production\'s fashion and editorial photography brings together artistic vision, creative direction, and technical mastery to create images that define trends and tell bold visual stories.',
-    'Whether you\'re a fashion brand launching a new collection, a model building your portfolio, or a magazine commissioning an editorial spread — our team delivers images that command attention, drive desire, and stand the test of time.',
+    'Whether you\'re a fashion brand launching a new collection, a model building a high-impact portfolio, or a magazine commissioning an editorial spread — our team delivers imagery with perfect skin tones, immaculate lighting, and high-fashion aesthetics.',
+  ],
+  equipment: [
+    { icon: 'camera', name: 'Medium Format Systems', desc: 'Unparalleled color depth and detail for commercial print campaigns.' },
+    { icon: 'lighting', name: 'Broncolor Paras', desc: 'The gold standard in fashion lighting for that signature editorial look.' },
+    { icon: 'lens', name: 'Tethered Workstations', desc: 'Live viewing with Capture One for art directors and stylists on set.' },
+    { icon: 'monitor', name: 'Color-Calibrated Monitors', desc: 'Eizo monitors ensuring 100% accurate color reproduction for garments.' }
   ],
   includes: [
     { icon: '/images/icons/fashion.png', label: 'Creative Direction', desc: 'Full creative direction, mood boarding, and styling guidance' },
@@ -382,8 +412,8 @@ export const fashionData = {
     { icon: '/images/icons/magic.png', title: 'Concept', desc: 'Creative direction, mood board, and concept development.' },
     { icon: '/images/icons/fashion.png', title: 'Pre-Production', desc: 'Styling, model casting, location scouting, and HMU.' },
     { icon: '/images/icons/camera.png', title: 'Shoot', desc: 'High-energy shoot day with full creative team.' },
-    { icon: '/images/icons/magic.png', title: 'Post-Production', desc: 'High-end retouching, compositing, and color.' },
-    { icon: '/images/icons/digital.png', title: 'Delivery', desc: 'Web, print, and social media ready files.' },
+    { icon: '/images/icons/magic.png', title: 'Post-Production', desc: 'High-end retouching, frequency separation, and color grading.' },
+    { icon: '/images/icons/digital.png', title: 'Delivery', desc: 'Web, print, and billboard-ready TIFF files.' },
   ],
   galleryImages: [
     '/images/gallery_fashion_1.png',
@@ -439,7 +469,7 @@ export const fashionData = {
 };
 
 export const aerialData = {
-  title: 'Aerial Drone Shots',
+  title: 'Cinematic Aerial Drone',
   category: 'Aerial',
   tagline: '"See the world from a perspective few ever experience — breathtaking, boundless, cinematic."',
   color1: '#0D2744',
@@ -447,14 +477,20 @@ export const aerialData = {
   heroImage: '/images/gallery_cinematic_1.png',
   stats: [
     { value: '400+', label: 'Aerial Shoots' },
-    { value: '4K', label: 'Drone Quality' },
+    { value: '5.1K', label: 'Drone Quality' },
     { value: '50+', label: 'Locations' },
-    { value: 'FAA', label: 'Certified Pilots' },
+    { value: 'DGCA', label: 'Certified Pilots' },
   ],
   overviewTitle: 'Cinematic Perspectives From Above',
   overviewDesc: [
-    'Our aerial drone photography and videography service adds a dimension of grandeur to any project. Using DJI Mavic 3 Cine and professional drone rigs, we capture sweeping aerial landscapes, architectural overviews, and dramatic event perspectives that simply cannot be achieved from the ground.',
-    'Our DGCA-licensed drone pilots operate with the highest safety standards, ensuring smooth, legal, and stunning aerial content for weddings, real estate, corporate events, tourism, and more.',
+    'Our aerial drone photography and videography service adds a dimension of grandeur to any project. We capture sweeping aerial landscapes, architectural overviews, and dramatic event perspectives that simply cannot be achieved from the ground.',
+    'Our DGCA-licensed drone pilots operate with the highest safety standards, ensuring smooth, legal, and stunning aerial content for weddings, real estate, corporate events, tourism, and cinema production.',
+  ],
+  equipment: [
+    { icon: 'drone', name: 'DJI Inspire 3 & Mavic 3 Cine', desc: 'Hollywood-grade heavy-lift and agile drones recording in 5.1K Apple ProRes.' },
+    { icon: 'video', name: 'ND/PL Filters', desc: 'Professional cinema filters to maintain perfect shutter speed and remove glare.' },
+    { icon: 'monitor', name: 'DJI RC Pro', desc: 'Ultra-bright remote controllers for precise monitoring even in harsh sunlight.' },
+    { icon: 'stabilizer', name: 'Advanced ActiveTrack', desc: 'AI-assisted subject tracking for high-speed action and vehicle follows.' }
   ],
   includes: [
     { icon: '/images/icons/aerial.png', label: 'DJI Cinema Drones', desc: 'DJI Mavic 3 Cine — 4K/120fps cinema-grade drone' },
@@ -469,7 +505,7 @@ export const aerialData = {
     { icon: '/images/icons/location.png', title: 'Weather Check', desc: 'Optimal weather window selection for best results.' },
     { icon: '/images/icons/aerial.png', title: 'Fly', desc: 'Professional drone operation for cinematic aerial shots.' },
     { icon: '/images/icons/magic.png', title: 'Grade', desc: 'D-Log color grading for cinematic look.' },
-    { icon: '/images/icons/digital.png', title: 'Deliver', desc: '4K footage delivered via cloud within 5 days.' },
+    { icon: '/images/icons/digital.png', title: 'Deliver', desc: '4K/5K footage delivered via cloud within 5 days.' },
   ],
   galleryImages: [
     '/images/gallery_cinematic_1.png',
@@ -513,7 +549,7 @@ export const aerialData = {
       featured: false,
       features: [
         '8 Hours Coverage',
-        '4K/120fps Cinema Drone',
+        '5.1K Cinema Drone',
         '60+ Aerial Photos',
         'Full Cinematic Edit',
         'Multiple Locations',

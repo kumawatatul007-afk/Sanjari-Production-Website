@@ -14,11 +14,8 @@ const serviceLinks = [
 ];
 
 const Footer = () => {
-  const scrollTo = (id) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
+
     <footer className="footer">
       <div className="footer-top">
         <div className="footer-container">

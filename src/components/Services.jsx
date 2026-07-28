@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Heart, Video, User, Briefcase, Sparkles, Aperture, ArrowRight } from 'lucide-react';
+import { ScrollReveal, SplitText, TiltCard, StaggerContainer, StaggerItem } from './ScrollReveal';
 import './Services.css';
 
 const serviceRoutes = {
@@ -59,49 +59,14 @@ const services = [
 ];
 
 const ServiceCard = ({ service, index }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <motion.div
-      className="service-card-wrapper"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      style={{ perspective: 1000 }}
-    >
-      <motion.div 
+    <StaggerItem className="service-card-wrapper" style={{ height: '100%' }}>
+      <TiltCard 
         className="service-card" 
         id={`service-${service.id}`}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY }}
+        maxRotation={8}
+        whileHover={{ y: -6, boxShadow: '0 15px 35px rgba(0, 0, 0, 0.4)' }}
+        style={{ height: '100%' }}
       >
         <div className="service-card-inner">
           <div className="service-number">0{index + 1}</div>
@@ -126,47 +91,44 @@ const ServiceCard = ({ service, index }) => {
           </Link>
           <div className="service-hover-line" />
         </div>
-      </motion.div>
-    </motion.div>
+      </TiltCard>
+    </StaggerItem>
   );
 };
 
 const Services = () => {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
   return (
-    <section id="services" className="services-section" ref={sectionRef}>
+    <section id="services" className="services-section">
       {/* Decorative BG */}
       <div className="services-bg">
         <div className="services-bg-orb" />
       </div>
 
       <div className="services-container">
-        <motion.div 
-          className="services-header"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="section-tag">What We Do</p>
+        <div className="services-header">
+          <ScrollReveal variant="fadeIn" delay={0.1}>
+            <p className="section-tag">What We Do</p>
+          </ScrollReveal>
           <h2 className="section-title">
-            Our Premium <span>Services</span>
+            <SplitText text="Our Premium" /> <span><SplitText text="Services" /></span>
           </h2>
-          <p className="section-desc" style={{ margin: '1rem auto 0', textAlign: 'center', maxWidth: '600px' }}>
-            We offer a full spectrum of visual storytelling services, each crafted with precision,
-            creativity, and an unwavering commitment to excellence.
-          </p>
-        </motion.div>
+          <ScrollReveal variant="slideUp" delay={0.3}>
+            <p className="section-desc" style={{ margin: '1rem auto 0', textAlign: 'center', maxWidth: '600px' }}>
+              We offer a full spectrum of visual storytelling services, each crafted with precision,
+              creativity, and an unwavering commitment to excellence.
+            </p>
+          </ScrollReveal>
+        </div>
 
-        <div className="services-grid">
+        <StaggerContainer className="services-grid" threshold={0.05}>
           {services.map((service, i) => (
             <ServiceCard key={service.id} service={service} index={i} />
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );
 };
 
 export default Services;
+

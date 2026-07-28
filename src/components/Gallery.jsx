@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, ChevronRight } from 'lucide-react';
+import { ScrollReveal, SplitText, TiltCard } from './ScrollReveal';
 import './Gallery.css';
 
 const categories = ['All', 'Wedding', 'Portrait', 'Cinematic', 'Corporate', 'Fashion'];
@@ -28,7 +29,7 @@ const GalleryCard = ({ item }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.div
+    <TiltCard
       layout
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -38,6 +39,7 @@ const GalleryCard = ({ item }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       id={`gallery-item-${item.id}`}
+      maxRotation={6}
     >
       {/* Real photo with gradient fallback */}
       <div
@@ -69,7 +71,7 @@ const GalleryCard = ({ item }) => {
           <Eye size={20} className="gold-text" />
         </div>
       </div>
-    </motion.div>
+    </TiltCard>
   );
 };
 
@@ -89,20 +91,22 @@ const Gallery = () => {
     setVisibleCount(6);
   }, [activeCategory]);
 
-  // IntersectionObserver logic removed in favor of AnimatePresence and layout animations
-
   return (
     <section id="gallery" className="gallery-section" ref={sectionRef}>
       <div className="gallery-container">
         {/* Header */}
         <div className="gallery-header">
-          <p className="section-tag">Portfolio</p>
+          <ScrollReveal variant="fadeIn" delay={0.1}>
+            <p className="section-tag">Portfolio</p>
+          </ScrollReveal>
           <h2 className="section-title">
-            Our <span>Visual</span> Stories
+            <SplitText text="Our" /> <span><SplitText text="Visual" /></span> <SplitText text="Stories" />
           </h2>
-          <p className="section-desc" style={{ margin: '1rem auto 0', textAlign: 'center' }}>
-            A curated selection of our finest work across photography and videography.
-          </p>
+          <ScrollReveal variant="slideUp" delay={0.3}>
+            <p className="section-desc" style={{ margin: '1rem auto 0', textAlign: 'center' }}>
+              A curated selection of our finest work across photography and videography.
+            </p>
+          </ScrollReveal>
         </div>
 
         {/* Filter Tabs */}
@@ -148,3 +152,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

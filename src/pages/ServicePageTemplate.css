@@ -314,16 +314,101 @@
 .sp-feature-name {
   display: block;
   font-family: 'Raleway', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 0.2rem;
 }
+
 .sp-feature-desc {
   display: block;
   font-family: 'Raleway', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+/* ─── EQUIPMENT ARSENAL ─── */
+.sp-equipment {
+  padding: 5rem 0;
+  background: rgba(255,255,255,0.01);
+  border-top: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.sp-equipment-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sp-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.sp-equipment-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sp-equipment-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hero-color-2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sp-equipment-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.sp-equipment-card:hover::before {
+  opacity: 1;
+}
+
+.sp-equipment-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hero-color-2);
+  transition: all 0.3s ease;
+}
+
+.sp-equipment-card:hover .sp-equipment-icon {
+  background: var(--hero-color-2);
+  color: var(--dark);
+  transform: scale(1.1);
+}
+
+.sp-equipment-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+
+.sp-equipment-desc {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
   line-height: 1.5;
 }
 

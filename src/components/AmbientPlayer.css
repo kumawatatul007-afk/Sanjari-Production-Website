@@ -1,0 +1,140 @@
+.ambient-player-wrap {
+  position: fixed;
+  bottom: 95px; /* Stacked above scroll-to-top button */
+  right: 30px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ambient-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(6, 9, 16, 0.8);
+  border: 1px solid var(--glass-border-gold);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 175, 55, 0.1);
+  transition: var(--transition);
+}
+
+
+.ambient-btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  border-color: var(--gold);
+  box-shadow: 0 15px 35px var(--gold-glow);
+}
+
+.ambient-icon-wrap {
+  position: absolute;
+  color: var(--white);
+  z-index: 3;
+  transition: color 0.3s ease;
+}
+
+.ambient-btn:hover .ambient-icon-wrap {
+  color: var(--gold);
+}
+
+/* Tooltip */
+.ambient-tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border-gold);
+  padding: 0.6rem 1.1rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  animation: tooltip-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ambient-tooltip span {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--glass-border-gold);
+}
+
+@keyframes tooltip-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Wave visualizer inside button */
+.visualizer-bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  padding-bottom: 8px;
+  opacity: 0.25;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.ambient-btn.playing .visualizer-bars {
+  opacity: 0.7;
+}
+
+.v-bar {
+  width: 2.5px;
+  height: 25px;
+  background: var(--gold);
+  border-radius: 1px;
+  transform: scaleY(0.15);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+
+/* Dancing animation when playing */
+.ambient-btn.playing .v-bar {
+  animation: bounce-bar 1.2s ease-in-out infinite alternate;
+}
+
+.ambient-btn.playing .bar-1 { animation-delay: 0.1s; }
+.ambient-btn.playing .bar-2 { animation-delay: 0.4s; }
+.ambient-btn.playing .bar-3 { animation-delay: 0.2s; }
+.ambient-btn.playing .bar-4 { animation-delay: 0.6s; }
+.ambient-btn.playing .bar-5 { animation-delay: 0.3s; }
+
+@keyframes bounce-bar {
+  0% { transform: scaleY(0.15); }
+  100% { transform: scaleY(0.85); }
+}
+
+@media (max-width: 768px) {
+  .ambient-player-wrap {
+    bottom: 78px;
+    right: 20px;
+  }
+  .ambient-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+
