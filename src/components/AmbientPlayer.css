@@ -8,28 +8,52 @@
   align-items: flex-end;
 }
 
+/* Glassmorphism Control Pill */
+.ambient-control-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(6, 9, 16, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 30px;
+  border: 1px solid var(--glass-border-gold);
+  padding: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ambient-player-wrap.expanded .ambient-control-pill {
+  padding: 4px 10px;
+  box-shadow: 0 15px 35px var(--gold-glow);
+  background: rgba(6, 9, 16, 0.9);
+}
+
+/* Control Buttons */
 .ambient-btn {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(6, 9, 16, 0.8);
-  border: 1px solid var(--glass-border-gold);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 175, 55, 0.1);
   transition: var(--transition);
 }
 
-
 .ambient-btn:hover {
-  transform: scale(1.08) translateY(-2px);
+  transform: scale(1.05);
   border-color: var(--gold);
-  box-shadow: 0 15px 35px var(--gold-glow);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+.ambient-btn.playing {
+  border-color: var(--gold);
+  background: rgba(6, 9, 16, 0.8);
+  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.15);
 }
 
 .ambient-icon-wrap {
@@ -43,34 +67,74 @@
   color: var(--gold);
 }
 
+/* Prev/Next Mini Buttons */
+.control-sub-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fade-in-sub 0.3s ease forwards;
+}
+
+@keyframes fade-in-sub {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.control-sub-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+  transform: scale(1.08);
+}
+
 /* Tooltip */
 .ambient-tooltip {
   position: absolute;
   bottom: calc(100% + 12px);
   right: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
+  background: rgba(6, 9, 16, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border-gold);
-  padding: 0.6rem 1.1rem;
-  border-radius: 4px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   animation: tooltip-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.ambient-tooltip span {
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.72rem;
+.tooltip-tag {
+  font-family: var(--font-body);
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.track-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--gold);
 }
 
 .tooltip-arrow {
   position: absolute;
   top: 100%;
-  right: 20px;
+  right: 24px;
   width: 0;
   height: 0;
   border-left: 6px solid transparent;
@@ -92,18 +156,18 @@
   justify-content: center;
   gap: 3px;
   padding-bottom: 8px;
-  opacity: 0.25;
+  opacity: 0.2;
   z-index: 1;
   transition: opacity 0.3s ease;
 }
 
 .ambient-btn.playing .visualizer-bars {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .v-bar {
-  width: 2.5px;
-  height: 25px;
+  width: 2px;
+  height: 22px;
   background: var(--gold);
   border-radius: 1px;
   transform: scaleY(0.15);

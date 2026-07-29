@@ -42,11 +42,14 @@ const CinemaTheater = () => {
   useEffect(() => {
     if (activeVideo) {
       document.body.style.overflow = 'hidden';
+      window.dispatchEvent(new CustomEvent('cinema-modal-open'));
     } else {
       document.body.style.overflow = '';
+      window.dispatchEvent(new CustomEvent('cinema-modal-close'));
     }
     return () => {
       document.body.style.overflow = '';
+      window.dispatchEvent(new CustomEvent('cinema-modal-close'));
     };
   }, [activeVideo]);
 
@@ -147,7 +150,6 @@ const CinemaTheater = () => {
                   <video 
                     src={activeVideo.videoUrl} 
                     autoPlay
-                    muted
                     playsInline
                     controls 
                     loop 
