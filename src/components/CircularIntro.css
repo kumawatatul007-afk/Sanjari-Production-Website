@@ -1,0 +1,443 @@
+.circular-intro-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #070c16 0%, #020408 100%);
+  z-index: 999990; /* Right below the Preloader or replaces it */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-body);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), filter 1s ease-in-out;
+}
+
+/* When exiting, blur the entire background and zoom out */
+.circular-intro-overlay.exit-active {
+  opacity: 0;
+  filter: blur(15px);
+  pointer-events: none;
+}
+
+.intro-stars-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Camera Grid Overlay --- */
+.camera-grid-overlay {
+  position: absolute;
+  inset: 0;
+  border: 20px solid rgba(0, 0, 0, 0.4);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.camera-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: border-color 0.4s ease;
+}
+
+.circular-intro-overlay:hover .camera-corner {
+  border-color: var(--gold);
+}
+
+.camera-corner.top-left { top: 30px; left: 30px; border-right: none; border-bottom: none; }
+.camera-corner.top-right { top: 30px; right: 30px; border-left: none; border-bottom: none; }
+.camera-corner.bottom-left { bottom: 30px; left: 30px; border-right: none; border-top: none; }
+.camera-corner.bottom-right { bottom: 30px; right: 30px; border-left: none; border-top: none; }
+
+.camera-lens-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+.camera-lens-crosshair::before,
+.camera-lens-crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.15);
+}
+.camera-lens-crosshair::before {
+  top: 50%;
+  left: -10px;
+  width: 100px;
+  height: 1px;
+}
+.camera-lens-crosshair::after {
+  left: 50%;
+  top: -10px;
+  height: 100px;
+  width: 1px;
+}
+
+/* --- Center Hub --- */
+.intro-center-hub {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.hub-scanner-ring, .hub-scanner-ring-reverse {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hub-scanner-ring {
+  width: 250px;
+  height: 250px;
+  border: 2px dashed rgba(212, 175, 55, 0.15);
+  border-top-color: var(--gold);
+}
+
+.hub-scanner-ring-reverse {
+  width: 270px;
+  height: 270px;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.hub-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(2, 4, 8, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(212, 175, 55, 0.05);
+  z-index: 5;
+}
+
+.hub-brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  color: #fff;
+  margin-bottom: 0.1rem;
+}
+
+.hub-brand-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hub-interactive-box {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-loading-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.scan-bar {
+  width: 80px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1px;
+}
+.scan-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: var(--gold);
+  animation: scan-loading 1.2s infinite ease-in-out;
+}
+
+@keyframes scan-loading {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+.scan-percent {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--white-60);
+  font-weight: 600;
+}
+
+.hub-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--dark);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+}
+
+.hub-enter-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+}
+
+/* --- Orbiting Cards --- */
+.orbit-ring-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.orbit-ring-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: orbit-ring 45s linear infinite;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* When exiting, cards fly outward violently */
+.orbit-ring-container.burst {
+  animation-play-state: paused;
+}
+
+.orbit-ring-container:hover,
+.orbit-ring-container:hover .orbit-card-inner {
+  animation-play-state: paused;
+}
+
+.orbit-card-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  --card-angle: 0deg;
+  --card-radius: 0px;
+  transform: translate(-50%, -50%) rotate(var(--card-angle)) translate(var(--card-radius)) rotate(calc(-1 * var(--card-angle)));
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.orbit-card-inner {
+  animation: orbit-card 45s linear infinite;
+  will-change: transform;
+}
+
+.orbit-img-card {
+  width: clamp(90px, 11vw, 150px);
+  aspect-ratio: 10 / 14;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--dark-3);
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orbit-img-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(2, 4, 8, 0.95) 100%);
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+
+.orbit-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.orbit-card-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 6px;
+  border: 1.5px solid var(--gold);
+  opacity: 0;
+  box-shadow: 0 0 15px var(--gold-glow);
+  transition: opacity 0.4s ease;
+  z-index: 3;
+}
+
+.orbit-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.65rem 0.5rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.orbit-card-cat {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.orbit-card-title {
+  font-size: 0.72rem;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover States for Cards */
+.orbit-img-card:hover {
+  transform: scale(1.12) translateY(-10px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), var(--shadow-gold);
+  border-color: var(--gold);
+  z-index: 100;
+}
+
+.orbit-img-card:hover .orbit-card-photo {
+  transform: scale(1.1);
+}
+
+.orbit-img-card:hover .orbit-card-glow {
+  opacity: 1;
+}
+
+/* --- Skip button --- */
+.intro-skip-btn {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: transparent;
+  color: var(--white-60);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1.1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.intro-skip-btn:hover {
+  color: #fff;
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.05);
+  letter-spacing: 0.25em;
+}
+
+/* --- Glow Orbs --- */
+.intro-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-gold {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  top: 15%;
+  left: 20%;
+}
+
+.orb-theme {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%);
+  bottom: 10%;
+  right: 15%;
+}
+
+/* Orbit keyframes */
+@keyframes orbit-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-card {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .orbit-img-card {
+    width: 80px;
+  }
+  .orbit-card-title {
+    font-size: 0.6rem;
+  }
+  .intro-skip-btn {
+    top: 20px;
+    right: 20px;
+  }
+  .hub-scanner-ring {
+    width: 190px;
+    height: 190px;
+  }
+  .hub-scanner-ring-reverse {
+    width: 210px;
+    height: 210px;
+  }
+  .hub-content {
+    width: 170px;
+    height: 170px;
+  }
+  .hub-brand-name {
+    font-size: 1.1rem;
+  }
+}

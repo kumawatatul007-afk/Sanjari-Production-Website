@@ -124,7 +124,7 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Grid */}
+        {/* Grid */} 
         <motion.div layout className="gallery-grid">
           <AnimatePresence>
             {displayedItems.map(item => (
@@ -132,7 +132,6 @@ const Gallery = () => {
             ))}
           </AnimatePresence>
         </motion.div>
-
         {/* Load More */}
         {visibleCount < filtered.length && (
           <div className="gallery-more">

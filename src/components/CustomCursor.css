@@ -7,7 +7,7 @@
   border: 1px solid var(--gold-glow);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 999999; /* Float above everything including customizer drawers */
   transition: background-color 0.2s, border 0.2s;
 }
 
@@ -20,7 +20,16 @@
   background-color: var(--gold);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 1000000;
+}
+
+.cursor-trail-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999998;
 }
 
 /* Hide default cursor on desktop */
@@ -35,7 +44,7 @@
 
 /* Hide custom cursor on mobile/touch devices */
 @media (max-width: 1023px) {
-  .cursor-ring, .cursor-dot {
+  .cursor-ring, .cursor-dot, .cursor-trail-canvas {
     display: none !important;
   }
 }

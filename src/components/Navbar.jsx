@@ -43,10 +43,8 @@ const Navbar = () => {
   const scrollTo = (href) => {
     setMenuOpen(false);
     if (!isHome) {
+      localStorage.setItem('sanjari-scroll-target', href);
       navigate('/');
-      setTimeout(() => {
-        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
       return;
     }
     const el = document.querySelector(href);

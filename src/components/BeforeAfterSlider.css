@@ -13,7 +13,7 @@
 }
 
 .slider-header-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--gold);

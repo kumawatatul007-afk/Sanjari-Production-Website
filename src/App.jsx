@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,6 +13,8 @@ import Preloader from './components/Preloader';
 import CustomCursor from './components/CustomCursor';
 import FloatingButtons from './components/FloatingButtons';
 import AmbientPlayer from './components/AmbientPlayer';
+import CircularIntro from './components/CircularIntro';
+import ThemeCustomizer from './components/ThemeCustomizer';
 
 // Service Pages
 import WeddingPage from './pages/WeddingPage';
@@ -63,6 +64,26 @@ const PageWrapper = ({ children }) => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    const savedTarget = localStorage.getItem('sanjari-scroll-target');
+    const hash = window.location.hash;
+    const target = savedTarget || hash;
+
+    if (target && location.pathname === '/') {
+      localStorage.removeItem('sanjari-scroll-target');
+      
+      const timer = setTimeout(() => {
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 800);
+
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -83,13 +104,33 @@ const AnimatedRoutes = () => {
 };
 
 function App() {
+  const [showIntro, setShowIntro] = useState(() => {
+    // Check if intro has run in this session
+    return !sessionStorage.getItem('sanjari-intro-seen');
+  });
+
+  useEffect(() => {
+    const triggerIntro = () => {
+      setShowIntro(true);
+    };
+    window.addEventListener('sanjari-trigger-intro', triggerIntro);
+    return () => window.removeEventListener('sanjari-trigger-intro', triggerIntro);
+  }, []);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    sessionStorage.setItem('sanjari-intro-seen', 'true');
+  };
+
   return (
     <BrowserRouter>
       <CustomCursor />
       <Preloader />
+      {showIntro && <CircularIntro onComplete={handleIntroComplete} />}
       <Navbar />
       <AnimatedRoutes />
       <FloatingButtons />
+      <ThemeCustomizer />
       <AmbientPlayer />
       <Footer />
     </BrowserRouter>

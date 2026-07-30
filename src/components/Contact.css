@@ -136,7 +136,7 @@
 }
 
 .form-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -254,7 +254,7 @@
 }
 
 .success-message h4 {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   color: var(--gold);
 }

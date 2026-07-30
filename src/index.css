@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Syne:wght@500;700;800&display=swap');
 
+/* Color Theme Defaults (Gold) */
 :root {
   --gold: #d4af37; /* Satin liquid gold */
   --gold-light: #f3e5ab; /* Satin light gold */
@@ -24,6 +25,7 @@
   --glass-border-gold: rgba(212, 175, 55, 0.16);
   --glass-blur: 24px;
 
+  /* Typography Presets */
   --font-heading: 'Cinzel', serif;
   --font-body: 'Raleway', sans-serif;
   --font-accent: 'Playfair Display', serif;
@@ -35,6 +37,63 @@
   --shadow-gold: 0 0 25px rgba(212, 175, 55, 0.2);
   --shadow-gold-lg: 0 0 45px rgba(212, 175, 55, 0.35);
   --shadow-dark: 0 25px 55px rgba(0,0,0,0.6);
+}
+
+/* --- luxury color themes --- */
+
+/* Aurora Teal Theme */
+body.theme-teal {
+  --gold: #00f2fe;
+  --gold-light: #4facfe;
+  --gold-dark: #00a8cc;
+  --gold-glow: rgba(0, 242, 254, 0.35);
+  --shadow-gold: 0 0 25px rgba(0, 242, 254, 0.25);
+  --shadow-gold-lg: 0 0 45px rgba(0, 242, 254, 0.45);
+  --glass-border-gold: rgba(0, 242, 254, 0.2);
+}
+
+/* Royal Amethyst Theme */
+body.theme-purple {
+  --gold: #b388ff;
+  --gold-light: #e040fb;
+  --gold-dark: #7c4dff;
+  --gold-glow: rgba(179, 136, 255, 0.35);
+  --shadow-gold: 0 0 25px rgba(179, 136, 255, 0.25);
+  --shadow-gold-lg: 0 0 45px rgba(179, 136, 255, 0.45);
+  --glass-border-gold: rgba(179, 136, 255, 0.2);
+}
+
+/* Rose Bronze Theme */
+body.theme-bronze {
+  --gold: #e0a96d;
+  --gold-light: #f5cac3;
+  --gold-dark: #cd7f32;
+  --gold-glow: rgba(224, 169, 109, 0.35);
+  --shadow-gold: 0 0 25px rgba(224, 169, 109, 0.25);
+  --shadow-gold-lg: 0 0 45px rgba(224, 169, 109, 0.45);
+  --glass-border-gold: rgba(224, 169, 109, 0.2);
+}
+
+/* Crimson Velvet Theme */
+body.theme-crimson {
+  --gold: #ff4757;
+  --gold-light: #ff6b81;
+  --gold-dark: #ff2a3a;
+  --gold-glow: rgba(255, 71, 87, 0.35);
+  --shadow-gold: 0 0 25px rgba(255, 71, 87, 0.25);
+  --shadow-gold-lg: 0 0 45px rgba(255, 71, 87, 0.45);
+  --glass-border-gold: rgba(255, 71, 87, 0.2);
+}
+
+/* --- typography presets override --- */
+body.font-cinzel {
+  --font-heading: 'Cinzel', serif;
+}
+body.font-playfair {
+  --font-heading: 'Playfair Display', serif;
+}
+body.font-syne {
+  --font-heading: 'Syne', sans-serif;
 }
 
 *, *::before, *::after {

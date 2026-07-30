@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 0.7rem;
   font-weight: 700;
   color: rgba(255,255,255,0.4);
@@ -86,7 +86,7 @@
 
 /* Columns */
 .footer-col-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-heading);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.2em;
