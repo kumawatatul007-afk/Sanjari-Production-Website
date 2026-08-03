@@ -18,7 +18,7 @@ const filmsList = [
     id: 2,
     title: "Deep Ocean Drone Reel",
     category: "Landscape Cinematic",
-    duration: "02:10",
+    duration: "02:10", 
     aspect: "16:9 Cinema",
     desc: "Aerial footage tracking shoreline breakers and deep sea currents, utilizing custom LUTs for rich ocean teal saturation.",
     videoUrl: "https://vjs.zencdn.net/v/oceans.mp4",

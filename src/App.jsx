@@ -24,6 +24,15 @@ import CorporatePage from './pages/CorporatePage';
 import FashionPage from './pages/FashionPage';
 import AerialPage from './pages/AerialPage';
 
+// Admin Suite Pages & Storage
+import { initStorage } from './utils/storage';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminOverview from './pages/admin/AdminOverview';
+import AdminBookings from './pages/admin/AdminBookings';
+import AdminGallery from './pages/admin/AdminGallery';
+import AdminServices from './pages/admin/AdminServices';
+
 import './App.css';
 
 // Home page — all sections together
@@ -87,6 +96,7 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        {/* Main Website Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
         <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
@@ -98,8 +108,34 @@ const AnimatedRoutes = () => {
         <Route path="/services/corporate" element={<PageWrapper><CorporatePage /></PageWrapper>} />
         <Route path="/services/fashion" element={<PageWrapper><FashionPage /></PageWrapper>} />
         <Route path="/services/aerial" element={<PageWrapper><AerialPage /></PageWrapper>} />
+
+        {/* Administrative Backend Routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLayout><AdminOverview /></AdminLayout>} />
+        <Route path="/admin/bookings" element={<AdminLayout><AdminBookings /></AdminLayout>} />
+        <Route path="/admin/gallery" element={<AdminLayout><AdminGallery /></AdminLayout>} />
+        <Route path="/admin/services" element={<AdminLayout><AdminServices /></AdminLayout>} />
       </Routes>
     </AnimatePresence>
+  );
+};
+
+const AppContent = ({ showIntro, handleIntroComplete }) => {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  return (
+    <>
+      {!isAdmin && <CustomCursor />}
+      <Preloader />
+      {showIntro && !isAdmin && <CircularIntro onComplete={handleIntroComplete} />}
+      {!isAdmin && <Navbar />}
+      <AnimatedRoutes />
+      {!isAdmin && <FloatingButtons />}
+      {!isAdmin && <ThemeCustomizer />}
+      {!isAdmin && <AmbientPlayer />}
+      {!isAdmin && <Footer />}
+    </>
   );
 };
 
@@ -110,6 +146,9 @@ function App() {
   });
 
   useEffect(() => {
+    // Initialize LocalStorage Database Schemas
+    initStorage();
+
     const triggerIntro = () => {
       setShowIntro(true);
     };
@@ -124,19 +163,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CustomCursor />
-      <Preloader />
-      {showIntro && <CircularIntro onComplete={handleIntroComplete} />}
-      <Navbar />
-      <AnimatedRoutes />
-      <FloatingButtons />
-      <ThemeCustomizer />
-      <AmbientPlayer />
-      <Footer />
+      <AppContent showIntro={showIntro} handleIntroComplete={handleIntroComplete} />
     </BrowserRouter>
   );
 }
 
 export default App;
-
-

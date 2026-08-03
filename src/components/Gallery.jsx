@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, ChevronRight } from 'lucide-react';
 import { ScrollReveal, SplitText, TiltCard } from './ScrollReveal';
+import { getGallery } from '../utils/storage';
 import './Gallery.css';
 
 const categories = ['All', 'Wedding', 'Portrait', 'Cinematic', 'Corporate', 'Fashion'];
@@ -78,11 +79,22 @@ const GalleryCard = ({ item }) => {
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [visibleCount, setVisibleCount] = useState(6);
+  const [items, setItems] = useState([]);
   const sectionRef = useRef(null);
 
+  useEffect(() => {
+    setItems(getGallery() || []);
+
+    const handleUpdate = () => {
+      setItems(getGallery() || []);
+    };
+    window.addEventListener('sanjari-gallery-updated', handleUpdate);
+    return () => window.removeEventListener('sanjari-gallery-updated', handleUpdate);
+  }, []);
+
   const filtered = activeCategory === 'All'
-    ? galleryItems
-    : galleryItems.filter(item => item.cat === activeCategory);
+    ? items
+    : items.filter(item => item.cat === activeCategory);
 
   const displayedItems = filtered.slice(0, visibleCount);
 

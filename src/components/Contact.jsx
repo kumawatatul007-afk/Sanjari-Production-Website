@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Clock, Send, CheckCircle } from 'lucide-react';
 
 import { ScrollReveal, SplitText } from './ScrollReveal';
+import { getBookings, saveBookings } from '../utils/storage';
 import './Contact.css';
 
 const contactInfo = [
@@ -36,11 +37,40 @@ const Contact = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
+  const servicePrices = {
+    wedding: 85000,
+    videography: 65000,
+    portrait: 15000,
+    corporate: 55000,
+    fashion: 45000,
+    aerial: 25000
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSending(true);
     setTimeout(() => {
+      // Save new inquiry to LocalStorage bookings database
+      try {
+        const currentBookings = getBookings() || [];
+        const todayStr = new Date().toISOString().split('T')[0];
+        
+        const newBooking = {
+          id: Date.now(),
+          name: form.name,
+          email: form.email,
+          service: form.service || 'wedding',
+          date: todayStr,
+          status: 'Pending',
+          amount: servicePrices[form.service] || 0,
+          message: form.message
+        };
+        
+        saveBookings([newBooking, ...currentBookings]);
+      } catch (err) {
+        console.error('Failed to append booking to LocalStorage:', err);
+      }
+
       setSending(false);
       setSubmitted(true);
       setForm({ name: '', email: '', service: '', message: '' });
