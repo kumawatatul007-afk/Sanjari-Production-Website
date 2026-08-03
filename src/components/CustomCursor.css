@@ -32,12 +32,14 @@
   z-index: 999998;
 }
 
-/* Hide default cursor on desktop */
+/* Hide default cursor on desktop, except in admin mode */
 @media (min-width: 1024px) {
-  body {
+  body:not(.admin-mode) {
     cursor: none;
   }
-  a, button, .hover-target {
+  body:not(.admin-mode) a, 
+  body:not(.admin-mode) button, 
+  body:not(.admin-mode) .hover-target {
     cursor: none;
   }
 }

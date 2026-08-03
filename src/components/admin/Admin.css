@@ -1,21 +1,24 @@
 /* ─── LUXURY ADMIN GLOBAL STYLES ────────────────────────────────────────── */
 
 /* Theme Variables for Admin Panel */
-:root {
+body {
   --admin-bg: #030712;
   --admin-card-bg: rgba(11, 21, 40, 0.65);
   --admin-border: rgba(255, 255, 255, 0.05);
-  --admin-gold: #d4af37;
-  --admin-gold-light: #f3e5ab;
-  --admin-gold-dark: #aa7c11;
-  --admin-gold-glow: rgba(212, 175, 55, 0.2);
+  
+  /* Inherit dynamic variables from the active color theme */
+  --admin-gold: var(--gold, #d4af37);
+  --admin-gold-light: var(--gold-light, #f3e5ab);
+  --admin-gold-dark: var(--gold-dark, #aa7c11);
+  --admin-gold-glow: var(--gold-glow, rgba(212, 175, 55, 0.2));
+  
   --admin-accent-blue: #00f2fe;
   --admin-accent-purple: #b388ff;
   --admin-accent-green: #00e676;
   --admin-accent-red: #ff4757;
   --admin-accent-orange: #ff9100;
   
-  --font-heading: 'Cinzel', serif;
+  --font-heading: var(--font-heading, 'Cinzel', serif);
   --font-body: 'Raleway', sans-serif;
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -43,8 +46,8 @@
 }
 
 .admin-glass-panel:hover {
-  border-color: rgba(212, 175, 55, 0.2);
-  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.08);
+  border-color: var(--admin-gold-glow);
+  box-shadow: 0 15px 35px var(--admin-gold-glow);
 }
 
 /* Luxury Scrollbar */
@@ -122,11 +125,11 @@
 .admin-btn-gold {
   background: linear-gradient(135deg, var(--admin-gold), var(--admin-gold-dark));
   color: #030712;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 15px var(--admin-gold-glow);
 }
 .admin-btn-gold:hover {
   background: linear-gradient(135deg, var(--admin-gold-light), var(--admin-gold));
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 20px var(--admin-gold-glow);
 }
 
 /* Blue Button */

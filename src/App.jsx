@@ -124,6 +124,17 @@ const AppContent = ({ showIntro, handleIntroComplete }) => {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
 
+  useEffect(() => {
+    if (isAdmin) {
+      document.body.classList.add('admin-mode');
+    } else {
+      document.body.classList.remove('admin-mode');
+    }
+    return () => {
+      document.body.classList.remove('admin-mode');
+    };
+  }, [isAdmin]);
+
   return (
     <>
       {!isAdmin && <CustomCursor />}
@@ -132,7 +143,7 @@ const AppContent = ({ showIntro, handleIntroComplete }) => {
       {!isAdmin && <Navbar />}
       <AnimatedRoutes />
       {!isAdmin && <FloatingButtons />}
-      {!isAdmin && <ThemeCustomizer />}
+      <ThemeCustomizer />
       {!isAdmin && <AmbientPlayer />}
       {!isAdmin && <Footer />}
     </>
@@ -148,6 +159,19 @@ function App() {
   useEffect(() => {
     // Initialize LocalStorage Database Schemas
     initStorage();
+
+    // Load active theme and font globally on mount
+    const savedTheme = localStorage.getItem('sanjari-theme') || 'gold';
+    const savedFont = localStorage.getItem('sanjari-font') || 'cinzel';
+    
+    const body = document.body;
+    body.classList.remove('theme-gold', 'theme-teal', 'theme-purple', 'theme-bronze', 'theme-crimson');
+    if (savedTheme !== 'gold') {
+      body.classList.add(`theme-${savedTheme}`);
+    }
+
+    body.classList.remove('font-cinzel', 'font-playfair', 'font-syne');
+    body.classList.add(`font-${savedFont}`);
 
     const triggerIntro = () => {
       setShowIntro(true);

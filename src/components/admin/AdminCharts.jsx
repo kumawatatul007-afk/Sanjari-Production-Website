@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-// ─── Radial Progress Ring ──────────────────────────────────────────────────
+// ─── Radial Progress Ring (Rotating & Fluctuation) ──────────────────────────
 export const RadialProgressRing = ({ percentage = 75, size = 120, strokeWidth = 10, color = '#d4af37', label = 'Progress' }) => {
+  const [livePercentage, setLivePercentage] = useState(percentage);
+
+  useEffect(() => {
+    setLivePercentage(percentage);
+  }, [percentage]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const deviation = Math.round((Math.random() - 0.5) * 4); // +/- 2%
+      setLivePercentage(prev => {
+        const target = prev + deviation;
+        // Keep within 5% of original percentage and in bounds [10, 100]
+        if (Math.abs(target - percentage) > 6) return percentage;
+        return Math.max(10, Math.min(100, target));
+      });
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [percentage]);
+
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (percentage / 100) * circumference;
+  const offset = circumference - (livePercentage / 100) * circumference;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
       <div style={{ position: 'relative', width: size, height: size }}>
-        <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <motion.svg 
+          width={size} 
+          height={size} 
+          animate={{ rotate: [-90, 270] }}
+          transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+          style={{ transformOrigin: 'center' }}
+        >
           {/* Background circle */}
           <circle
             cx={size / 2}
@@ -31,11 +56,11 @@ export const RadialProgressRing = ({ percentage = 75, size = 120, strokeWidth = 
             strokeDasharray={circumference}
             initial={{ strokeDashoffset: circumference }}
             animate={{ strokeDashoffset: offset }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             strokeLinecap="round"
             style={{ filter: `drop-shadow(0 0 6px ${color}80)` }}
           />
-        </svg>
+        </motion.svg>
         {/* Center Text */}
         <div
           style={{
@@ -48,12 +73,12 @@ export const RadialProgressRing = ({ percentage = 75, size = 120, strokeWidth = 
           }}
         >
           <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 0.6 }}
+            key={livePercentage}
             style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-heading)' }}
           >
-            {percentage}%
+            {livePercentage}%
           </motion.span>
         </div>
       </div>
@@ -65,9 +90,34 @@ export const RadialProgressRing = ({ percentage = 75, size = 120, strokeWidth = 
 };
 
 
-// ─── Donut Chart (Spinning & Rotating Slices) ──────────────────────────────
+// ─── Donut Chart (Spinning & Rotating Slices with Live Updates) ─────────────
 export const LuxuryDonutChart = ({ data = [] }) => {
-  const total = data.reduce((acc, curr) => acc + curr.value, 0);
+  const [liveData, setLiveData] = useState(data);
+
+  useEffect(() => {
+    setLiveData(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+    const interval = setInterval(() => {
+      setLiveData(prevData => {
+        return prevData.map(item => {
+          // Fluctuate each category slightly occasionally
+          if (Math.random() > 0.6) {
+            const deviation = Math.random() > 0.5 ? 1 : -1;
+            // Bound so it stays realistic and doesn't drop to negative
+            const val = Math.max(1, item.value + deviation);
+            return { ...item, value: val };
+          }
+          return item;
+        });
+      });
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [data]);
+
+  const total = liveData.reduce((acc, curr) => acc + curr.value, 0);
   const radius = 55;
   const strokeWidth = 14;
   const size = 160;
@@ -76,8 +126,8 @@ export const LuxuryDonutChart = ({ data = [] }) => {
   let currentOffset = 0;
 
   // Render list of segments
-  const segments = data.map((item, index) => {
-    const percentage = (item.value / total) * 100;
+  const segments = liveData.map((item, index) => {
+    const percentage = total > 0 ? (item.value / total) * 100 : 0;
     const strokeLength = (percentage / 100) * circumference;
     const strokeOffset = circumference - strokeLength;
     const rotation = (currentOffset / circumference) * 360 - 90;
@@ -100,33 +150,40 @@ export const LuxuryDonutChart = ({ data = [] }) => {
         <motion.svg
           width={size}
           height={size}
-          initial={{ rotate: -240, scale: 0.6, opacity: 0 }}
-          animate={{ rotate: 0, scale: 1, opacity: 1 }}
-          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           style={{ transformOrigin: 'center' }}
         >
-          {segments.map((segment, index) => (
-            <motion.circle
-              key={segment.name}
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              fill="transparent"
-              stroke={segment.color}
-              strokeWidth={strokeWidth}
-              strokeDasharray={circumference}
-              // Set starting state with full offset (empty circle)
-              initial={{ strokeDashoffset: circumference }}
-              // Animate to target state
-              animate={{ strokeDashoffset: segment.strokeOffset }}
-              transition={{ delay: index * 0.1, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                transform: `rotate(${segment.rotation}deg)`,
-                transformOrigin: 'center',
-                filter: `drop-shadow(0 0 5px ${segment.color}40)`
-              }}
-            />
-          ))}
+          {/* Continuous spinning group */}
+          <motion.g
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+            style={{ transformOrigin: 'center' }}
+          >
+            {segments.map((segment, index) => (
+              <motion.circle
+                key={segment.name}
+                cx={size / 2}
+                cy={size / 2}
+                r={radius}
+                fill="transparent"
+                stroke={segment.color}
+                strokeWidth={strokeWidth}
+                strokeDasharray={circumference}
+                // Set starting state with full offset (empty circle)
+                initial={{ strokeDashoffset: circumference }}
+                // Animate to target state
+                animate={{ strokeDashoffset: segment.strokeOffset }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                style={{
+                  transform: `rotate(${segment.rotation}deg)`,
+                  transformOrigin: 'center',
+                  filter: `drop-shadow(0 0 5px ${segment.color}40)`
+                }}
+              />
+            ))}
+          </motion.g>
         </motion.svg>
         <div
           style={{
@@ -140,7 +197,13 @@ export const LuxuryDonutChart = ({ data = [] }) => {
           }}
         >
           <span style={{ fontSize: '0.65rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total</span>
-          <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-heading)' }}>{total}</span>
+          <motion.span 
+            key={total}
+            animate={{ scale: [1, 1.08, 1] }}
+            style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', fontFamily: 'var(--font-heading)' }}
+          >
+            {total}
+          </motion.span>
         </div>
       </div>
 
@@ -161,17 +224,38 @@ export const LuxuryDonutChart = ({ data = [] }) => {
 };
 
 
-// ─── Area/Line Trend Chart ─────────────────────────────────────────────────
+// ─── Area/Line Trend Chart (Morphing Lines & Real-Time updates) ──────────────
 export const LuxuryLineChart = ({ data = [], height = 180 }) => {
   if (data.length === 0) return null;
+
+  const [liveData, setLiveData] = useState(data);
+
+  useEffect(() => {
+    setLiveData(data);
+  }, [data]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveData(prevData => {
+        return prevData.map((item, idx) => {
+          // Fluctuate values slightly up/down (+/- 1 or 2)
+          const original = data[idx]?.value || 5;
+          const deviation = Math.round((Math.random() - 0.5) * 3);
+          const val = Math.max(1, Math.min(original + 4, item.value + deviation));
+          return { ...item, value: val };
+        });
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [data]);
 
   const padding = 35;
   const chartHeight = height;
   const chartWidth = 500;
 
-  // Max value calculation for scaling
-  const maxVal = Math.max(...data.map(d => d.value), 4) * 1.15;
-  const pointsCount = data.length;
+  // Max value calculation for scaling based on live data
+  const maxVal = Math.max(...liveData.map(d => d.value), 4) * 1.15;
+  const pointsCount = liveData.length;
 
   const getX = (index) => {
     return padding + (index * (chartWidth - padding * 2)) / (pointsCount - 1);
@@ -182,15 +266,15 @@ export const LuxuryLineChart = ({ data = [], height = 180 }) => {
   };
 
   // Generate SVG Path
-  const points = data.map((d, i) => `${getX(i)},${getY(d.value)}`);
+  const points = liveData.map((d, i) => `${getX(i)},${getY(d.value)}`);
   
   // Renders beautiful cubic curves instead of sharp angles
   let pathD = `M ${points[0]}`;
   for (let i = 0; i < points.length - 1; i++) {
     const x1 = getX(i);
-    const y1 = getY(data[i].value);
+    const y1 = getY(liveData[i].value);
     const x2 = getX(i + 1);
-    const y2 = getY(data[i + 1].value);
+    const y2 = getY(liveData[i + 1].value);
     // Control points
     const cpX1 = x1 + (x2 - x1) / 2;
     const cpY1 = y1;
@@ -242,9 +326,8 @@ export const LuxuryLineChart = ({ data = [], height = 180 }) => {
         <motion.path
           d={areaD}
           fill="url(#chartGradient)"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
+          animate={{ d: areaD }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
         />
 
         {/* The animated trend line */}
@@ -255,44 +338,45 @@ export const LuxuryLineChart = ({ data = [], height = 180 }) => {
           strokeWidth="3.5"
           strokeLinecap="round"
           initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ pathLength: 1, opacity: 1, d: pathD }}
+          transition={{ 
+            pathLength: { duration: 2, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 1 },
+            d: { duration: 0.8, ease: "easeInOut" }
+          }}
         />
 
         {/* Data points */}
-        {data.map((d, i) => (
+        {liveData.map((d, i) => (
           <g key={i}>
             {/* Outer halo */}
             <motion.circle
               cx={getX(i)}
-              cy={getY(d.value)}
+              animate={{ cy: getY(d.value) }}
               r="7"
               fill="rgba(212, 175, 55, 0.15)"
               stroke="var(--admin-gold)"
               strokeWidth="1.5"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.1 * i + 0.5, type: 'spring', stiffness: 100 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
               style={{ cursor: 'pointer' }}
             />
             {/* Center dot */}
-            <circle
+            <motion.circle
               cx={getX(i)}
-              cy={getY(d.value)}
+              animate={{ cy: getY(d.value) }}
               r="3.5"
               fill="#ffffff"
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             />
             {/* Text labels */}
             <motion.text
               x={getX(i)}
-              y={getY(d.value) - 12}
+              animate={{ y: getY(d.value) - 12 }}
               textAnchor="middle"
               fill="#ffffff"
               fontSize="10px"
               fontWeight="bold"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 * i + 0.8 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               {d.value}
             </motion.text>
@@ -300,7 +384,7 @@ export const LuxuryLineChart = ({ data = [], height = 180 }) => {
         ))}
 
         {/* X Axis Labels */}
-        {data.map((d, i) => (
+        {liveData.map((d, i) => (
           <text
             key={d.label}
             x={getX(i)}
@@ -318,3 +402,4 @@ export const LuxuryLineChart = ({ data = [], height = 180 }) => {
     </div>
   );
 };
+

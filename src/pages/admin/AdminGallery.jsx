@@ -306,8 +306,80 @@ const AdminGallery = () => {
                 </div>
                 
                 <div className="admin-form-group">
-                  <label htmlFor="img">Image URL *</label>
-                  <input type="url" id="img" name="img" value={form.img} onChange={handleFormChange} className="admin-form-input" required placeholder="https://images.unsplash.com/..." />
+                  <label>Upload Image *</label>
+                  {form.img ? (
+                    <div style={{ position: 'relative', width: '100%', height: '140px', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+                      <img 
+                        src={form.img} 
+                        alt="Uploaded Preview" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setForm({ ...form, img: '' })}
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          right: '8px',
+                          background: 'rgba(255, 71, 87, 0.85)',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: '28px',
+                          height: '28px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#ffffff',
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                        }}
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div 
+                      onClick={() => document.getElementById('media-upload-add').click()}
+                      style={{
+                        width: '100%',
+                        height: '120px',
+                        border: '2px dashed rgba(255, 255, 255, 0.15)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        cursor: 'pointer',
+                        background: 'rgba(3, 7, 18, 0.6)',
+                        transition: 'border-color 0.2s',
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--admin-gold)'}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'}
+                    >
+                      <ImageIcon size={28} style={{ color: '#9ca3af' }} />
+                      <span style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: 600 }}>Click to upload image file</span>
+                      <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>PNG, JPG, JPEG up to 5MB</span>
+                      <input 
+                        type="file" 
+                        id="media-upload-add" 
+                        accept="image/*" 
+                        style={{ display: 'none' }} 
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              setForm({ ...form, img: reader.result });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                  {/* Keep hidden required input for form validation */}
+                  <input type="text" value={form.img} required style={{ opacity: 0, height: 0, width: 0, padding: 0, margin: 0, border: 0 }} readOnly />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -377,8 +449,80 @@ const AdminGallery = () => {
                 </div>
                 
                 <div className="admin-form-group">
-                  <label htmlFor="img">Image URL</label>
-                  <input type="url" id="img" name="img" value={form.img} onChange={handleFormChange} className="admin-form-input" required />
+                  <label>Upload Image *</label>
+                  {form.img ? (
+                    <div style={{ position: 'relative', width: '100%', height: '140px', borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(212, 175, 55, 0.3)' }}>
+                      <img 
+                        src={form.img} 
+                        alt="Uploaded Preview" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setForm({ ...form, img: '' })}
+                        style={{
+                          position: 'absolute',
+                          top: '8px',
+                          right: '8px',
+                          background: 'rgba(255, 71, 87, 0.85)',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: '28px',
+                          height: '28px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: '#ffffff',
+                          cursor: 'pointer',
+                          boxShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                        }}
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div 
+                      onClick={() => document.getElementById('media-upload-edit').click()}
+                      style={{
+                        width: '100%',
+                        height: '120px',
+                        border: '2px dashed rgba(255, 255, 255, 0.15)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        cursor: 'pointer',
+                        background: 'rgba(3, 7, 18, 0.6)',
+                        transition: 'border-color 0.2s',
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--admin-gold)'}
+                      onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'}
+                    >
+                      <ImageIcon size={28} style={{ color: '#9ca3af' }} />
+                      <span style={{ fontSize: '0.8rem', color: '#9ca3af', fontWeight: 600 }}>Click to upload image file</span>
+                      <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>PNG, JPG, JPEG up to 5MB</span>
+                      <input 
+                        type="file" 
+                        id="media-upload-edit" 
+                        accept="image/*" 
+                        style={{ display: 'none' }} 
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              setForm({ ...form, img: reader.result });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </div>
+                  )}
+                  {/* Keep hidden required input for form validation */}
+                  <input type="text" value={form.img} required style={{ opacity: 0, height: 0, width: 0, padding: 0, margin: 0, border: 0 }} readOnly />
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
